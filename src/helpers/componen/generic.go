@@ -1,6 +1,6 @@
 package componen
 
-func CheckIfRoles[T int64](parameter T) T {
+func CheckIfRoles(parameter int64) int64 {
 
 	if parameter == 0 {
 		return 1

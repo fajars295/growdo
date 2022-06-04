@@ -21,5 +21,5 @@ func RouteBanner(db *sql.DB, ctx *echo.Echo) {
 
 	apiAuth := ctx.Group("/api/v1/banner")
 	apiAuth.POST("/create", handler.Store, middle.MiddelWareAdmin(2))
-	apiAuth.GET("/get", handler.Get, middle.IsLogin)
+	apiAuth.GET("/get", handler.Get)
 }

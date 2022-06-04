@@ -14,7 +14,10 @@ type MasterTabel struct {
 
 type FilterCari struct {
 	Cari         string `json:"cari"`
+	Type         string `json:"type"`
+	Kolom        string `json:"kolom"`
 	Id           uint64 `json:"id"`
 	Roles        uint64 `json:"roles"`
 	StatusBanner bool   `json:"status_banner"`
+	StatusMaster bool   `json:"status_master"`
 }

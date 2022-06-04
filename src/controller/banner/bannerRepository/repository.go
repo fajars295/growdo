@@ -50,7 +50,7 @@ func (r *repository) FindDetail(consisi string, f *model.FilterCari) (*model.Ban
 	}
 	category := model.Banner{}
 	if rows.Next() {
-		l := rows.Scan(&category.Id, &category.Images, &category.Status, &category.Created_at, &category.Updated_at)
+		l := rows.Scan(&category.Id, &category.Images, &category.Status, &category.Url, &category.Created_at, &category.Updated_at)
 		if l != nil {
 			return nil, l
 		}
@@ -71,7 +71,7 @@ func (r *repository) All(condisi string, f *model.FilterCari) (*[]model.Banner, 
 	var hasil []model.Banner
 	for rows.Next() {
 		category := model.Banner{}
-		l := rows.Scan(&category.Id, &category.Images, &category.Status, &category.Created_at, &category.Updated_at)
+		l := rows.Scan(&category.Id, &category.Images, &category.Status, &category.Url, &category.Created_at, &category.Updated_at)
 		log.Println(l)
 		if l != nil {
 			return nil, l

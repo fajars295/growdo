@@ -15,3 +15,12 @@ func StringToBool(s string) bool {
 	fmt.Println(err)
 	return i
 }
+
+func SwitchCase(s string) string {
+	switch s {
+	case "blog":
+		return "type"
+	default:
+		return ""
+	}
+}

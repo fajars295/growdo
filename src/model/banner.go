@@ -3,6 +3,7 @@ package model
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 )
 
@@ -14,6 +15,7 @@ type Banner struct {
 	Id         uint64    `json:"id"`
 	Images     string    `json:"images" validate:"required"`
 	Status     bool      `json:"status" validate:"required"`
+	Url        string    `json:"url"`
 	Created_at time.Time `json:"created_at"`
 	Updated_at time.Time `json:"updated_at"`
 }
@@ -33,18 +35,20 @@ func NewBanner(data string, M *Banner, C *FilterCari) *funcBanner {
 }
 
 var (
-	columBanner = "images, status"
-	tabelBanner = "banner"
+	columBanner     = "images, status, url"
+	tabelBanner     = "banner"
+	selectImgBanner = fmt.Sprintf("CONCAT('%s', images), status, url", os.Getenv("BASE_URL"))
 )
 
 func (r *funcBanner) Create() string {
 	// data := "Banner () VALUES ($1, $2, $3, $4, $5, $6)"
 
-	query := fmt.Sprintf("INSERT INTO %s (%s) VALUES ('%s', %v) RETURNING ID",
+	query := fmt.Sprintf("INSERT INTO %s (%s) VALUES ('%s', %v, '%s') RETURNING ID",
 		tabelBanner,
 		columBanner,
 		r.Model.Images,
 		r.Model.Status,
+		r.Model.Url,
 	)
 	log.Println(query)
 	return query
@@ -54,7 +58,7 @@ func (r *funcBanner) Create() string {
 func (r *funcBanner) Detail() string {
 
 	var hasil string
-	var data = fmt.Sprintf("SELECT id, %s, %s FROM %s", columBanner, DateGlobal(), tabelBanner)
+	var data = fmt.Sprintf("SELECT id, %s, %s FROM %s", selectImgBanner, DateGlobal(), tabelBanner)
 
 	switch r.Data {
 	case "status":
